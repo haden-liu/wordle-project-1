@@ -13,6 +13,17 @@ const correctWord = wordList[Math.floor(Math.random()*wordList.length)]
 let gameOver = false
 let guessCorrect = false
 
+// enter user name
+let playerNmae = prompt('please enter your name')
+let nameDisplay = document.querySelector('#name')
+nameDisplay.innerHTML = playerNmae
+let initialScore = parseInt(document.querySelector('#result').innerHTML)
+
+let playerData = []
+
+// const finishBtn = document.querySelector('#finish-btn')
+// finishBtn.addEventListener('click', endGame())
+
 // add event listener to each button
 // extract data attributes of each button, and assign the button value to each click
 buttonElements.forEach(element => {
@@ -26,6 +37,24 @@ function populateWord(key) {
         letter+=1
     }
 }
+
+// trying to add an end of game function
+// after click the finish button, clear all styling and word input
+// push username and score to playerData
+// refresh page to game start
+
+// function endGame() {
+//     clearWord()    
+//     initialScore = 0
+//     document.querySelector('#result').innerHTML = initialScore.toString()
+//     row = 0
+//     letter = 0
+//     gameRestart()
+//     buttonElements.forEach(element => {
+//         element.addEventListener('click', function(){keyPress(element.attributes['data-key'].value)})
+//     })
+
+// }
 
 // after game over, remove value from inout box and color style
 function clearWord() {
@@ -51,12 +80,14 @@ function clearWord() {
 
 
 
+
+
 function checkWord() {
     let letterElements = wordElements[row].querySelectorAll('.word_cell')
 
-    
-    
     let numberOfCorrect = 0
+
+    let initialScore = parseInt(document.querySelector('#result').innerHTML)
     
     // find how many indexes of the enter word align with indexes of correct word
     // convert strings of the correct word and entered word to 2 arrays
@@ -92,16 +123,11 @@ function checkWord() {
         clearWord()
         //add HTML and function to record winner
         console.log("won 1")
+        initialScore = initialScore + 1
+        document.querySelector('#result').innerHTML = initialScore.toString()
         row = 0
         letter = 0
-        gameRestart()
-        
-        
-       
-
-    
-
-        
+        gameRestart()     
 
     } else if (row === 5) {
         gameOver = true
@@ -109,6 +135,7 @@ function checkWord() {
         clearWord()
         // winner record remains same no change
         console.log('won 0')
+        // addRecord()
         row = 0
         letter = 0
         gameRestart()
