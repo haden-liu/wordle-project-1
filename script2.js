@@ -8,7 +8,7 @@ let letter = 0
 
 // word list and correct word
 const wordList = ['apple','fight','brand','shout','jazzy','pizza']
-const correctWord = wordList[Math.floor(Math.random()*wordList.length)]
+let correctWord = wordList[Math.floor(Math.random()*wordList.length)]
 
 let gameOver = false
 let guessCorrect = false
@@ -21,8 +21,8 @@ let initialScore = parseInt(document.querySelector('#result').innerHTML)
 
 let playerData = []
 
-// const finishBtn = document.querySelector('#finish-btn')
-// finishBtn.addEventListener('click', endGame())
+const finishBtn = document.getElementById('finish-btn')
+finishBtn.addEventListener('click', function(){endGame()})
 
 // add event listener to each button
 // extract data attributes of each button, and assign the button value to each click
@@ -43,18 +43,19 @@ function populateWord(key) {
 // push username and score to playerData
 // refresh page to game start
 
-// function endGame() {
-//     clearWord()    
-//     initialScore = 0
-//     document.querySelector('#result').innerHTML = initialScore.toString()
-//     row = 0
-//     letter = 0
-//     gameRestart()
-//     buttonElements.forEach(element => {
-//         element.addEventListener('click', function(){keyPress(element.attributes['data-key'].value)})
-//     })
+function endGame() {
+  console.log('game finished')
+  clearWord()
+  initialScore = 0
+  document.querySelector('#result').innerHTML = initialScore.toString()
+  correctWord = wordList[Math.floor(Math.random()*wordList.length)]
+  row = 0
+  letter = 0
+  playerNmae = prompt('please enter your name')
+  nameDisplay.innerHTML = playerNmae
 
-// }
+
+}
 
 // after game over, remove value from inout box and color style
 function clearWord() {
@@ -78,7 +79,9 @@ function clearWord() {
     
 }
 
+// function gameRestart() {
 
+// }
 
 
 
@@ -127,6 +130,7 @@ function checkWord() {
         document.querySelector('#result').innerHTML = initialScore.toString()
         row = 0
         letter = 0
+        correctWord = wordList[Math.floor(Math.random()*wordList.length)]
         gameRestart()     
 
     } else if (row === 5) {
@@ -138,6 +142,7 @@ function checkWord() {
         // addRecord()
         row = 0
         letter = 0
+        correctWord = wordList[Math.floor(Math.random()*wordList.length)]
         gameRestart()
        
         
